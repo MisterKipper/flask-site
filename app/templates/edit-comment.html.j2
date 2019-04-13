@@ -1,0 +1,25 @@
+{% extends "base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Edit comment - Kyle's junk{% endblock %}
+
+{% block app_content %}
+  <div class="page-header">
+    <h1>Edit comment</h1>
+  </div>
+  <div>
+    {{wtf.quick_form(form)}}
+  </div>
+  <br>
+
+  {% if comment.disabled %}
+    <a class="btn btn-default btn-xs" href="{{url_for('.enable_comment', id=comment.id)}}">Undelete</a>
+  {% else %}
+    <a class="btn btn-danger btn-xs" href="{{url_for('.disable_comment', id=comment.id)}}">Delete</a>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  {{pagedown.include_pagedown()}}
+{% endblock %}

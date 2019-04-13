@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as macros %}
+
+{% block title %}Comment moderation - Kyle's junk{% endblock %}
+
+{% block app_content %}
+  <div class="page-header">
+    <h1>Comment moderation</h1>
+  </div>
+  {% set moderate = True %}
+  {% include "_comments.html.j2" %}
+  {% if pagination %}
+    <div class="pagination">
+      {{macros.pagination_widget(pagination, ".moderate")}}
+    </div>
+  {% endif %}
+{% endblock app_content %}
+

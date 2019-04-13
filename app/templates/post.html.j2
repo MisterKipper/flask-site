@@ -1,0 +1,21 @@
+{% extends "base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html.j2" as macros %}
+
+{% block title %}Post - Kyle's junk{% endblock %}
+
+{% block app_content %}
+  {% include "_posts.html.j2" %}
+  <h4 id="comments">Comments</h4>
+  {% if current_user.can(Permission.COMMENT) %}
+    <div class="comment-form">
+      {{wtf.quick_form(form)}}
+    </div>
+  {% endif %}
+  {% include "_comments.html.j2" %}
+  {% if pagination %}
+    <div class="pagination">
+      {{macros.pagination_widget(pagination, ".post", fragment="#comments", id=posts[0].id)}}
+    </div>
+  {% endif %}
+{% endblock %}

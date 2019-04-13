@@ -1,0 +1,9 @@
+Dear {{user.username}},
+
+You have registered as a user of Kyle's junk. To confirm your account please navigate to this address:
+
+{{url_for("auth.activate", token=token, _external=True)}}
+
+Yours sincerely,
+
+Kyle
