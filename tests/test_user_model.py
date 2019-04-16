@@ -2,12 +2,23 @@ import unittest
 
 from flask import current_app
 
-from app.models import User, Permission, AnonymousUser
+from app import create_app, db
+from app.models import User, Permission, AnonymousUser, Role
 
 
 class UserModelTestCase(unittest.TestCase):
     def setUp(self):
+        self.app = create_app("testing")
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.create_all()
+        Role.insert_roles()
         self.u = User(password="boss")
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
 
     def test_password_setter(self):
         self.assertTrue(self.u.password_hash is not None)
