@@ -18,7 +18,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
+        if user is None or not user.verify_password(form.password.data):
             flash("Invalid username or password")
             return redirect(url_for("auth.login"))
         login_user(user, remember=form.remember_me.data)
@@ -52,7 +52,7 @@ def register():
         db.session.commit()
         flash("You have registered for my site. "
               "Please check your email for instructions on activating your account.")
-        token = user.generate_confirmation_token()
+        token = user.generate_activation_token()
         send_email(user.email, "Account activation", "auth/email/activate", user=user, token=token)
         return redirect(url_for("main.index"))
     return render_template("auth/register.html.j2", form=form)
@@ -67,7 +67,7 @@ def activate(token):
         db.session.commit()
         flash("Account activated.")
     else:
-        flash("Confirmation link invalid.")
+        flash("Activation link invalid.")
     return redirect(url_for("main.index"))
 
 
@@ -90,7 +90,7 @@ def inactive():
 @auth.route("/activate")
 @login_required
 def resend_activation():
-    token = current_user.generate_confirmation_token()
+    token = current_user.generate_activation_token()
     send_email(
         current_user.email,
         "Account activation",

@@ -13,8 +13,8 @@ class UserModelTestCase(unittest.TestCase):
         self.assertTrue(self.u.password_hash is not None)
 
     def test_password_verification(self):
-        self.assertTrue(self.u.check_password("boss"))
-        self.assertFalse(self.u.check_password("chief"))
+        self.assertTrue(self.u.verify_password("boss"))
+        self.assertFalse(self.u.verify_password("chief"))
 
     def test_password_salts_are_random(self):
         u2 = User(password="boss")
