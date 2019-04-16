@@ -22,15 +22,15 @@
           {% endif %}
         </div>
         <div class="post-footer">
-          <a href="{{url_for('.post', id=post.id)}}">
-            <span class="label label-default">Permalink</span>
+          <a href="{{url_for('.post', id=post.id)}}" class="label label-default">
+            Permalink
           </a>
-          <a href="{{url_for('.post', id=post.id)}}#comments">
-            <span class="label label-primary">{{post.comments.count()}} Comments</span>
+          <a href="{{url_for('.post', id=post.id)}}#comments" class="label label-primary">
+            {{post.comments.count()}} Comments
           </a>
           {% if current_user == post.author %}
-            <a href="{{url_for('.edit_post', id=post.id)}}">
-              <span class="label label-primary">Edit</span>
+            <a href="{{url_for('.edit_post', id=post.id)}}" class="label label-primary">
+              Edit
             </a>
           {% elif current_user.is_admin() %}
             <a href="{{url_for('.edit_post', id=post.id)}}">
