@@ -24,7 +24,7 @@
                 {{comment.body}}
               {% endif %}
             {% endif %}
-          {% elif capi/v1omment.body_html %}
+          {% elif comment.body_html %}
             {{comment.body_html | safe}}
           {% else %}
             {{comment.body}}
