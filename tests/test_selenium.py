@@ -1,10 +1,9 @@
 import unittest
 
-from selenium import webdriver
-
 import app.utils as utils
 from app import create_app, db
 from app.models import Role
+from selenium import webdriver
 
 
 class SeleniumTestCase(unittest.TestCase):

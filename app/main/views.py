@@ -1,11 +1,12 @@
-from flask import render_template, flash, redirect, url_for, request, current_app, abort
-from flask_login import login_required, current_user
+from flask import (abort, current_app, flash, redirect, render_template,
+                   request, url_for)
+from flask_login import current_user, login_required
 
-from . import main
-from .forms import EditProfileForm, EditProfileAdminForm, PostForm, CommentForm
 from .. import db
-from ..models import User, Post, Permission, Role, Comment
 from ..decorators import admin_required, permission_required
+from ..models import Comment, Permission, Post, Role, User
+from . import main
+from .forms import CommentForm, EditProfileAdminForm, EditProfileForm, PostForm
 
 
 @main.route("/", methods=["GET", "POST"])

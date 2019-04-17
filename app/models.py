@@ -3,10 +3,10 @@ from hashlib import md5
 
 import bleach
 from flask import current_app, url_for
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, AnonymousUserMixin
+from flask_login import AnonymousUserMixin, UserMixin
 from itsdangerous import BadData, TimedJSONWebSignatureSerializer
 from markdown import markdown
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, login
 from app.exceptions import ValidationError

@@ -1,10 +1,10 @@
 from flask import g, jsonify, request, url_for
 
+from ... import db
+from ...models import Comment, Permission, Post
 from . import api
 from .decorators import permission_required
 from .utils import to_dict_safe
-from ... import db
-from ...models import Comment, Permission, Post
 
 
 @api.route("/comments/")

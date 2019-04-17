@@ -2,8 +2,8 @@ from functools import wraps
 
 from flask import g
 
-from .authentication import forbidden
 from ...models import Permission
+from .authentication import forbidden
 
 
 def permission_required(permission):

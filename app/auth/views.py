@@ -1,12 +1,12 @@
-from flask import render_template, redirect, url_for, flash, request
-from flask_login import current_user, login_user, logout_user, login_required
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.urls import url_parse
 
-from . import auth
-from .forms import LoginForm, RegistrationForm
 from .. import db
 from ..email import send_email
 from ..models import User
+from . import auth
+from .forms import LoginForm, RegistrationForm
 
 
 @auth.route("/login", methods=["GET", "POST"])

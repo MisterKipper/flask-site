@@ -1,10 +1,11 @@
 import wtforms
 import wtforms.validators as validators
-from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, BooleanField, SelectField
 from flask_pagedown.fields import PageDownField
+from flask_wtf import FlaskForm
+from wtforms import (BooleanField, SelectField, StringField, SubmitField,
+                     TextAreaField)
 
-from ..models import User, Role
+from ..models import Role, User
 
 
 class EditProfileForm(FlaskForm):

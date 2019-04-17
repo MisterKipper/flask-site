@@ -5,7 +5,7 @@ from base64 import b64encode
 from flask import url_for
 
 from app import create_app, db
-from app.models import User, Role
+from app.models import Role, User
 
 
 class APITestCase(unittest.TestCase):
