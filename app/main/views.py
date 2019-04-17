@@ -163,3 +163,14 @@ def edit_profile_admin(id):
     form.location.data = user.location
     form.about_me.data = user.about_me
     return render_template("edit-profile.html.j2", form=form, user=user)
+
+
+@main.route("/shutdown")
+def server_shutdown():
+    if not current_app.testing:
+        abort(404)
+    shutdown = request.environ.get("werkzeug.server.shutdown")
+    if not shutdown:
+        abort(500)
+    shutdown()
+    return "Shutting down..."
