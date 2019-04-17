@@ -8,14 +8,10 @@
   {% include "_posts.html.j2" %}
   <h4 id="comments">Comments</h4>
   {% if current_user.can(Permission.COMMENT) %}
+    Leave a comment here.
     <div class="comment-form">
       {{wtf.quick_form(form)}}
     </div>
   {% endif %}
   {% include "_comments.html.j2" %}
-  {% if pagination %}
-    <div class="pagination">
-      {{macros.pagination_widget(pagination, ".post", fragment="#comments", id=posts[0].id)}}
-    </div>
-  {% endif %}
 {% endblock %}
