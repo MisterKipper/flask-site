@@ -32,7 +32,8 @@ def deploy():
 def dev_setup():
     upgrade()
     Role.insert_roles()
-    utils.insert_admin()
-    utils.insert_fake_users()
+    if not User.query.count() > 1:
+        utils.insert_admin()
+        utils.insert_fake_users()
     utils.insert_fake_posts()
-    # app.utils.insert_fake_comments()
+    utils.insert_fake_comments()
