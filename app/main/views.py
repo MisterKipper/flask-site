@@ -42,12 +42,8 @@ def post(id):
         db.session.commit()
         flash("Comment added.")
         return redirect(url_for(".post", id=post.id, page=-1))
-    page = request.args.get("page", 1, type=int)
-    pagination = post.comments.order_by(Comment.timestamp.desc()).paginate(
-        page, per_page=current_app.config["COMMENTS_PER_PAGE"], error_out=False)
-    comments = pagination.items
-    return render_template(
-        "post.html.j2", posts=[post], form=form, comments=comments, pagination=pagination)
+    comments = post.comments.filter_by(parent=None).order_by(Comment.timestamp.desc())
+    return render_template("post.html.j2", posts=[post], form=form, comments=comments)
 
 
 @main.route("/post/edit/<int:id>", methods=["GET", "POST"])

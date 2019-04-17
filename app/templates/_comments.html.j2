@@ -1,47 +1,53 @@
 <ul class="comments">
-  {% for comment in comments %}
+  {%- for comment in comments recursive %}
     <li class="comment">
-      <div class="comment-thumbnail">
-        <a href="{{url_for('.user', username=comment.author.username)}}">
-          <img class="img-rounded profile-thumbnail" src="{{comment.author.avatar(size=40)}}">
-        </a>
-      </div>
-
-      <div class="comment-content">
-        <div class="comment-date">{{moment(comment.timestamp).fromNow()}}</div>
-        <div class="comment-author">
+      <div class="comment">
+        <div class="comment-thumbnail">
           <a href="{{url_for('.user', username=comment.author.username)}}">
-            {{comment.author.username}}
+            <img class="img-rounded profile-thumbnail" src="{{comment.author.avatar(size=40)}}">
           </a>
         </div>
-        <div class="comment-body">
-          {% if comment.disabled %}
-            <p><i>Comment deleted.</i></p>
-            {% if moderate or not comment.disabled %}
-              {% if comment.body_html %}
-                {{comment.body_html | safe}}
-              {% else %}
-                {{comment.body}}
+
+        <div class="comment-content">
+          <div class="comment-date">{{moment(comment.timestamp).fromNow()}}</div>
+          <div class="comment-author">
+            <a href="{{url_for('.user', username=comment.author.username)}}">
+              {{comment.author.username}}
+            </a>
+          </div>
+          <div class="comment-body">
+            {% if comment.disabled %}
+              <p><i>Comment deleted.</i></p>
+              {% if moderate or not comment.disabled %}
+                {% if comment.body_html %}
+                  {{comment.body_html | safe}}
+                {% else %}
+                  {{comment.body}}
+                {% endif %}
               {% endif %}
+            {% elif comment.body_html %}
+              {{comment.body_html | safe}}
+            {% else %}
+              {{comment.body}}
             {% endif %}
-          {% elif comment.body_html %}
-            {{comment.body_html | safe}}
-          {% else %}
-            {{comment.body}}
-          {% endif %}
-        </div>
-        <div class="comment-footer">
-          {% if current_user == comment.author %}
-            <a href="{{url_for('.edit_comment', id=comment.id)}}">
-              <span class="label label-primary">Edit</span>
-            </a>
-          {% elif current_user.can(Permission.MODERATE) %}
-            <a href="{{url_for('.edit_comment', id=comment.id)}}">
-              <span class="label label-danger">Edit [Admin]</span>
-            </a>
-          {% endif %}
+          </div>
+          <div class="comment-footer">
+            {% if current_user == comment.author %}
+              <a href="{{url_for('.edit_comment', id=comment.id)}}" class="label label-primary">
+                Edit
+              </a>
+            {% elif current_user.can(Permission.MODERATE) %}
+              <a href="{{url_for('.edit_comment', id=comment.id)}}" class="label label-danger">
+                Edit [Admin]
+              </a>
+            {% endif %}
+            <a href="" class="label label-default">Reply</a>
+          </div>
         </div>
       </div>
+      {%- if comment.children -%}
+        <ul class="comments">{{loop(comment.children)}}</ul>
+      {%- endif %}
     </li>
   {% endfor %}
 </ul>
