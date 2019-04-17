@@ -30,7 +30,7 @@ def insert_fake_users(count=100):
                  name=fake.name(),
                  location=fake.city(),
                  about_me=fake.text(),
-                 member_since=fake.past_date())
+                 member_since=fake.past_datetime())
         db.session.add(u)
         try:
             db.session.commit()
@@ -44,7 +44,7 @@ def insert_fake_posts(count=100):
     user_count = User.query.count()
     for i in range(count):
         u = User.query.offset(randint(0, user_count - 1)).first()
-        p = Post(body=fake.text(), timestamp=fake.past_date(), author=u)
+        p = Post(body=fake.text(), timestamp=fake.past_datetime(), author=u)
         db.session.add(p)
     db.session.commit()
 
@@ -61,12 +61,10 @@ def insert_fake_comments(count=1000):
             parent = Comment.query.filter_by(post=post)\
                                   .offset(randint(0, comment_count - 1))\
                                   .first()
+            timestamp = fake.date_time_between(parent.timestamp, "now")
         else:
             parent = None
-        c = Comment(body=fake.text(),
-                    timestamp=fake.past_date(),
-                    author=user,
-                    post=post,
-                    parent=parent)
+            timestamp = fake.date_time_between(post.timestamp, "now")
+        c = Comment(body=fake.text(), timestamp=timestamp, author=user, post=post, parent=parent)
         db.session.add(c)
     db.session.commit()
