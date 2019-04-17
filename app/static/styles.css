@@ -41,7 +41,7 @@ div.post-content {
 div.post-footer {
     text-align: right;
 }
-div.post-footer a {
+.label {
     margin: 1px;
 }
 ul.comments {
@@ -57,7 +57,10 @@ ul.comments li.comment {
 ul.comments li.comment:nth-child(1) {
     border-top: 1px solid #e0e0e0;
 }
-ul.comments li.comment:hover {
+/* ul.comments li.comment:hover { */
+/*     background-color: #f0f0f0; */
+/* } */
+div.comment:hover {
     background-color: #f0f0f0;
 }
 div.comment-date {
