@@ -41,7 +41,7 @@
                 Edit [Admin]
               </a>
             {% endif %}
-            <a href="" class="label label-default">Reply</a>
+            <a href="{{url_for('.reply_to_comment', id=comment.id)}}" class="label label-default">Reply</a>
           </div>
         </div>
       </div>

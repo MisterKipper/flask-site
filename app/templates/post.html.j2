@@ -6,12 +6,13 @@
 
 {% block app_content %}
   {% include "_posts.html.j2" %}
+  <div class="comments">
   <h4 id="comments">Comments</h4>
-  {% if current_user.can(Permission.COMMENT) %}
-    Leave a comment here.
-    <div class="comment-form">
-      {{wtf.quick_form(form)}}
-    </div>
-  {% endif %}
+    {% if current_user.can(Permission.COMMENT) %}
+      <div class="comment-form">
+        {{wtf.quick_form(form)}}
+      </div>
+    {% endif %}
   {% include "_comments.html.j2" %}
+  </div>
 {% endblock %}

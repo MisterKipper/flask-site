@@ -1,5 +1,4 @@
-from flask import (abort, current_app, flash, redirect, render_template,
-                   request, url_for)
+from flask import (abort, current_app, flash, redirect, render_template, request, url_for)
 from flask_login import current_user, login_required
 
 from .. import db
@@ -78,6 +77,23 @@ def edit_comment(id):
         return redirect(url_for(".post", id=comment.post_id))
     form.body.data = comment.body
     return render_template("edit-comment.html.j2", form=form, comment=comment)
+
+
+@main.route("/comment/reply/<int:id>", methods=["GET", "POST"])
+@login_required
+def reply_to_comment(id):
+    parent = Comment.query.get_or_404(id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(author=current_user._get_current_object(),
+                          post=parent.post,
+                          body=form.body.data,
+                          parent_id=id)
+        db.session.add(comment)
+        db.session.commit()
+        flash("Comment created.")
+        return redirect(url_for(".post", id=comment.post_id))
+    return render_template("comment.html.j2", form=form, comments=[parent])
 
 
 @main.route("/admin")

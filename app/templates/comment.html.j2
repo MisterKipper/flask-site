@@ -1,0 +1,22 @@
+{% extends "base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Comment - Kyle's junk{% endblock %}
+
+{% block app_content %}
+
+  <div class="page-header">
+    <h1>Reply to comment</h1>
+  </div>
+  {% include "_comments.html.j2" %}
+  <div>
+    {{wtf.quick_form(form)}}
+  </div>
+  <br>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  {{pagedown.include_pagedown()}}
+{% endblock %}

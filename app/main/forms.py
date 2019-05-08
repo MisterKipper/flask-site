@@ -54,5 +54,5 @@ class PostForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    body = PageDownField("", validators=[validators.DataRequired()])
+    body = PageDownField("Leave a comment here.", validators=[validators.DataRequired()])
     submit = SubmitField("Submit")
