@@ -16,3 +16,8 @@
   {% include "_comments.html.j2" %}
   </div>
 {% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  {{pagedown.include_pagedown()}}
+{% endblock %}
