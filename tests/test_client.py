@@ -44,7 +44,7 @@ class FlaskClientTestCase(unittest.TestCase):
 
         user = User.query.filter_by(username="brian").first()
         token = user.generate_activation_token()
-        response = self.client.get(f"/auth/confirm/{token}", follow_redirects=True)
+        response = self.client.get(f"/auth/activate/{token}", follow_redirects=True)
         user.activate(token)
         self.assertEqual(response.status_code, 200)
         self.assertTrue("Account activated." in response.get_data(as_text=True))

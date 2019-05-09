@@ -33,7 +33,7 @@ class APITestCase(unittest.TestCase):
         }
 
     def test_no_auth(self):
-        response = self.client.get(url_for("api.get_posts"), content_type="application/json")
+        response = self.client.get("/api/v1/posts", content_type="application/json")
         self.assertEqual(response.status_code, 401)
 
     def test_posts(self):
@@ -43,7 +43,7 @@ class APITestCase(unittest.TestCase):
         db.session.commit()
 
         body = "# Test post\n- One\n- Two"
-        body_html = "<h1>Test post</h1><ul><li>One</li><li>Two</li></ul>"
+        body_html = "<h1>Test post</h1>\n<ul>\n<li>One</li>\n<li>Two</li>\n</ul>"
         response = self.client.post("/api/v1/posts/",
                                     headers=self.get_api_headers("brian", "life"),
                                     data=json.dumps({"body": body}))

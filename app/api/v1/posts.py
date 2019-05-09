@@ -7,7 +7,7 @@ from .authentication import forbidden
 from .decorators import admin_required, permission_required
 
 
-@api.route("/posts/")
+@api.route("/posts")
 def get_posts():
     posts = Post.query.all()
     return jsonify({"posts": [post.to_dict() for post in posts]})
