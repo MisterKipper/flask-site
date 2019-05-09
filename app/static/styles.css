@@ -38,6 +38,15 @@ div.post-content {
     margin-left: 48px;
     min-height: 48px;
 }
+div.post-content ul {
+    list-style-type: disc;
+}
+div.post-content ul ul {
+    list-style-type: circle;
+}
+div.post-content ul ul ul{
+    list-style-type: square;
+}
 div.post-footer {
     text-align: right;
 }
@@ -57,9 +66,6 @@ ul.comments li.comment {
 ul.comments li.comment:nth-child(1) {
     border-top: 1px solid #e0e0e0;
 }
-/* ul.comments li.comment:hover { */
-/*     background-color: #f0f0f0; */
-/* } */
 div.comment:hover {
     background-color: #f0f0f0;
 }
@@ -75,6 +81,15 @@ div.comment-thumbnail {
 div.comment-content {
     margin-left: 48px;
     min-height: 48px;
+}
+div.comment-content ul {
+    list-style-type: disc;
+}
+div.comment-content ul ul {
+    list-style-type: circle;
+}
+div.comment-content ul ul ul{
+    list-style-type: square;
 }
 div.comment-form {
     margin: 16px 0px 16px 32px;
