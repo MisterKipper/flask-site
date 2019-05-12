@@ -38,9 +38,9 @@ class UserModelTestCase(unittest.TestCase):
 
     def test_user_role(self):
         u = User(email="example@example.com", password="user")
-        for perm in ["FOLLOW", "COMMENT", "WRITE"]:
+        for perm in ["FOLLOW", "COMMENT"]:
             self.assertTrue(u.can(getattr(Permission, perm)))
-        for perm in ["MODERATE", "ADMIN"]:
+        for perm in ["WRITE", "MODERATE", "ADMIN"]:
             self.assertFalse(u.can(getattr(Permission, perm)))
 
     def test_anonymous_user(self):

@@ -41,9 +41,8 @@ def insert_fake_users(count=100):
 
 def insert_fake_posts(count=100):
     fake = Faker()
-    user_count = User.query.count()
+    u = User.query.filter_by(role="admin")
     for i in range(count):
-        u = User.query.offset(randint(0, user_count - 1)).first()
         p = Post(body=fake.text(), timestamp=fake.past_datetime(), author=u)
         db.session.add(p)
     db.session.commit()
