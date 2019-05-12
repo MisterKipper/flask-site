@@ -15,16 +15,17 @@ def get_comments():
 
 @api.route("/comments/<int:id>")
 def get_comment(id):
-    comment = Comment.get_or_404(id)
+    comment = Comment.query.get_or_404(id)
     return jsonify(to_dict_safe(comment))
 
 
 @api.route("/posts/<int:id>/comments/")
 def get_post_comments(id):
-    post = Post.get_or_404(id)
+    post = Post.query.get_or_404(id)
     comments = Comment.query.with_parent(post).all()
     return jsonify({
-        "parent": post.to_dict(),
+        "post": post.to_dict(),
+        "count": len(comments),
         "comments": [to_dict_safe(comment) for comment in comments]
     })
 
@@ -32,7 +33,7 @@ def get_post_comments(id):
 @api.route("/posts/<int:id>/comments/", methods=["POST"])
 @permission_required(Permission.COMMENT)
 def post_comment_on_post(id):
-    post = Post.get_or_404(id)
+    post = Post.query.get_or_404(id)
     body = request.json.get("body")
     comment = Comment(author=g.current_user, post=post, body=body)
     db.session.add(comment)

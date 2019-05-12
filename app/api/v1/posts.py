@@ -7,7 +7,7 @@ from .authentication import forbidden
 from .decorators import admin_required, permission_required
 
 
-@api.route("/posts")
+@api.route("/posts/")
 def get_posts():
     posts = Post.query.all()
     return jsonify({"posts": [post.to_dict() for post in posts]})
@@ -32,7 +32,7 @@ def get_post(id):
 @api.route("/posts/<int:id>", methods=["PUT"])
 @permission_required(Permission.WRITE)
 def edit_post(id):
-    post = Post.query_or_404(id)
+    post = Post.query.get_or_404(id)
     if g.current_user != post.author and not g.current_user.can(Permission.ADMIN):
         return forbidden("Insufficient permissions")
     post.body = request.json.get("body", post.body)
@@ -44,7 +44,7 @@ def edit_post(id):
 @api.route("/posts/<int:id>", methods=["DELETE"])
 @admin_required
 def delete_post(id):
-    post = Post.query_or_404(id)
+    post = Post.query.get_or_404(id)
     db.session.delete(post)
     db.session.commit()
     return (jsonify({"posts_url": url_for("api.get_posts")}), 200)
