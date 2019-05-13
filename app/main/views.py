@@ -197,7 +197,7 @@ def server_shutdown():
 @main.after_app_request
 def after_request(response):
     for query in get_debug_queries():
-        if query.duration >= current_app.config["SLOW_DB_QUERY_TIME"]:
+        if query.duration >= current_app.config["DB_SLOW_QUERY_TIME"]:
             current_app.logger.warning(f"Slow query: {query.statement}\n"
                                        f"Parameters: {query.parameters}\n"
                                        f"Duration: {query.duration}\n"
