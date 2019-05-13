@@ -13,6 +13,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config():
     SECRET_KEY = os.environ["SECRET_KEY"]
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_RECORD_QUERIES = True
+    SLOW_DB_QUERY_TIME = 0.5
     MAIL_SERVER = os.environ.get("MAIL_SERVER")
     MAIL_PORT = int(os.environ.get("MAIL_PORT"))
     MAIL_USE_TLS = True

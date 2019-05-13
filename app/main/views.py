@@ -1,5 +1,6 @@
 from flask import (abort, current_app, flash, redirect, render_template, request, url_for)
 from flask_login import current_user, login_required
+from flask_sqlalchemy import get_debug_queries
 
 from .. import db
 from ..decorators import admin_required, permission_required
@@ -191,3 +192,14 @@ def server_shutdown():
         abort(500)
     shutdown()
     return "Shutting down..."
+
+
+@main.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration >= current_app.config["SLOW_DB_QUERY_TIME"]:
+            current_app.logger.warning(f"Slow query: {query.statement}\n"
+                                       f"Parameters: {query.parameters}\n"
+                                       f"Duration: {query.duration}\n"
+                                       f"Context: {query.context}")
+    return response
