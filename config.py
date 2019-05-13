@@ -12,6 +12,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config():
     SECRET_KEY = os.environ["SECRET_KEY"]
+    SSL_REDIRECT = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = os.environ.get("DB_RECORD_QUERIES")
     DB_SLOW_QUERY_TIME = 0.5
@@ -47,6 +48,7 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = (os.environ.get("DATABASE_URL") or
                                "sqlite:///" + os.path.join(basedir, "prod.sqlite"))
+    SSL_REDIRECT = True
 
     @classmethod
     def init_app(cls, app):
