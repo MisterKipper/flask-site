@@ -1,1 +1,1 @@
--r requirements/google-cloud.txt
+-r requirements/deploy.txt
