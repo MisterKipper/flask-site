@@ -1,7 +1,6 @@
 from datetime import datetime
 from random import randint
 
-from faker import Faker
 from flask import current_app
 from sqlalchemy.exc import IntegrityError
 
@@ -20,6 +19,7 @@ def insert_admin():
 
 
 def insert_fake_users(count=100):
+    from faker import Faker
     fake = Faker()
     i = 0
     while i < count:
@@ -40,6 +40,7 @@ def insert_fake_users(count=100):
 
 
 def insert_fake_posts(count=100):
+    from faker import Faker
     fake = Faker()
     u = User.query.filter_by(role="admin")
     for i in range(count):
@@ -49,6 +50,7 @@ def insert_fake_posts(count=100):
 
 
 def insert_fake_comments(count=1000):
+    from faker import Faker
     fake = Faker()
     post_count = Post.query.count()
     user_count = User.query.count()
