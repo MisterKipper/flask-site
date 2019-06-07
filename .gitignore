@@ -127,3 +127,5 @@ dmypy.json
 *.sqlite
 *.org
 tmp/
+secret.yaml
+secret.json
