@@ -46,8 +46,13 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = (os.environ.get("DATABASE_URL") or
-                               "sqlite:///" + os.path.join(basedir, "prod.sqlite"))
+    host = f"/cloudsql/{os.environ.get('CLOUD_SQL_CONNECTION_NAME')}"
+    SQLALCHEMY_DATABASE_URI = "postgresql+pg8000://{user}:{password}@" \
+        "/{database}?unix_sock={host}".format(
+        user=os.environ.get("CLOUD_SQL_USERNAME"),
+        password=os.environ.get("CLOUD_SQL_PASSWORD"),
+        host=host,
+        database=os.environ.get("CLOUD_SQL_DATABASE_NAME"))
     SSL_REDIRECT = True
 
     @classmethod

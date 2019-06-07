@@ -1,16 +1,10 @@
-runtime: python27
-api_version: 1
-threadsafe: true
+runtime: python37
 
-libraries:
-- name: ssl
-  version: latest
-
-# [START handlers]
 handlers:
 - url: /static
   static_dir: app/static
 - url: /.*
-  script: main.app
-# [END handlers]
+  script: auto
 
+includes:
+- secret.yaml
