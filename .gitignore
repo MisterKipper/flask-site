@@ -123,7 +123,6 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/flask
 
-.flaskenv
 *.sqlite
 *.org
 tmp/

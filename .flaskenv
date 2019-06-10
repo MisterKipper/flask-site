@@ -1,0 +1,2 @@
+FLASK_APP="kyle-site.py"
+FLASK_RUN_PORT=8000
