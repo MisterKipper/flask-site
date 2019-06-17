@@ -6,5 +6,11 @@ handlers:
 - url: /.*
   script: auto
 
+entrypoint: gunicorn kyle-site:app
+
+env_variables:
+  FLASK_APP: "kyle-site.py"
+  FLASK_RUN_PORT: 8000
+
 includes:
 - secret.yaml

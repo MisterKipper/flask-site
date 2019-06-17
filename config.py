@@ -1,12 +1,5 @@
 import os
 
-import dotenv
-
-try:
-    dotenv.load_dotenv(dotenv.find_dotenv())
-except Exception as e:
-    print(f"Couldn't load .env: {e.message}")
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -46,13 +39,12 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    host = f"/cloudsql/{os.environ.get('CLOUD_SQL_CONNECTION_NAME')}"
-    SQLALCHEMY_DATABASE_URI = "postgresql+pg8000://{user}:{password}@" \
-        "/{database}?unix_sock={host}".format(
-        user=os.environ.get("CLOUD_SQL_USERNAME"),
-        password=os.environ.get("CLOUD_SQL_PASSWORD"),
-        host=host,
-        database=os.environ.get("CLOUD_SQL_DATABASE_NAME"))
+    SQLALCHEMY_DATABASE_URI = ("postgresql+pg8000://{user}:{password}@"
+                               "/{database}?unix_sock={host}".format(
+                                   user=os.environ.get("CLOUD_SQL_USERNAME"),
+                                   password=os.environ.get("CLOUD_SQL_PASSWORD"),
+                                   host=f"/cloudsql/{os.environ.get('CLOUD_SQL_INSTANCE_NAME')}",
+                                   database=os.environ.get("CLOUD_SQL_DATABASE_NAME")))
     SSL_REDIRECT = True
 
     @classmethod
