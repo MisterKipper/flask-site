@@ -1,7 +1,7 @@
 import os
 import sys
-import click
 
+import click
 from flask_migrate import Migrate, upgrade
 
 import app.utils as utils

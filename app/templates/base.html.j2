@@ -34,6 +34,9 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{url_for('main.index')}}">Home</a></li>
+          {# <li><a href="{{url_for('main.blog')}}">Blog</a></li> #}
+          <li><a href="{{url_for('main.demos')}}">Demos</a></li> 
+          {# <li><a href="{{url_for('main.about_me)}}">About Me</a></li> #}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if current_user.is_anonymous %}

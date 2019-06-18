@@ -123,3 +123,15 @@ div.flask-pagedown-preview h3 {
 .post-body h3 {
     font-size: 120%;
 }
+ul.demos {
+    list-style-type: none;
+}
+div.demo-thumbnail {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+}
+div.demo-description {
+    margin-left: 48px;
+    min-height: 48px;
+}

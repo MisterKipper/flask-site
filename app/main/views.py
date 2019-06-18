@@ -194,6 +194,11 @@ def server_shutdown():
     return "Shutting down..."
 
 
+@main.route("/demos")
+def demos():
+    return render_template("demos.html.j2")
+
+
 @main.after_app_request
 def after_request(response):
     for query in get_debug_queries():
