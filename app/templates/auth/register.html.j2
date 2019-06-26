@@ -1,15 +1,9 @@
 {% extends "base.html.j2" %}
-{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block title %}Register - Kyle's junk{% endblock %}
+{% set title = "Register" %}
 
-{% block app_content %}
-  <div class="page-header">
-    <h1>Register</h1>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      {{wtf.quick_form(form)}}
-    </div>
-  </div>
+{% block page_header %}Register{% endblock %}
+
+{% block content %}
+  {{macros.make_form(form)}}
 {% endblock %}

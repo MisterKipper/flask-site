@@ -1,0 +1,16 @@
+{% extends "base.html.j2" %}
+{# {% import "_macros.html.j2" as macros %} #}
+
+{% set title = "About me" %}
+
+{% block content %}
+  <article>
+    <h2>This is me.</h2>
+    <p>Presumably there's some interesting stuff to say about myself.</p>
+  </article>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  {{pagedown.include_pagedown()}}
+{% endblock %}

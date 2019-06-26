@@ -1,18 +1,8 @@
 {% extends "base.html.j2" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Edit post - Kyle's junk{% endblock %}
+{% set title = "Edit post" %}
 
-{% block app_content %}
-  <div class="page-header">
-    <h1>Edit post</h1>
-  </div>
-  <div>
-    {{wtf.quick_form(form)}}
-  </div>
-{% endblock %}
-
-{% block scripts %}
-  {{super()}}
-  {{pagedown.include_pagedown()}}
+{% block page_header %}Edit post{% endblock %}
+{% block content %}
+  {{macros.make_form(form)}}
 {% endblock %}

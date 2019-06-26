@@ -1,23 +1,11 @@
 {% extends "base.html.j2" %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% import "_macros.html.j2" as macros %}
 
-{% block title %}Home - Kyle's junk{% endblock %}
-
-{% block app_content %}
-  <div class="page-header">
-    <h1>
-      {% if current_user.is_anonymous %}
-        Welcome to Kyle's junk!
-      {% else %}
-        Hello, {{current_user.username}}!
-      {% endif %}
-    </h1>
-  </div>
-
+{% set title = "Home" %}
+{% block content %}
   <div>
     {% if current_user.can(Permission.WRITE) %}
-      {{wtf.quick_form(form)}}
+      {{macros.make_form(form)}}
     {% endif %}
   </div>
 

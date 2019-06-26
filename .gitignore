@@ -128,3 +128,6 @@ dmypy.json
 tmp/
 secret.yaml
 secret.json
+app/static/fonts/
+app/static/img/
+*.min.js

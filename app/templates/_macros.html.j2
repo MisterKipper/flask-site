@@ -1,3 +1,7 @@
+{% macro title(page_name) %}
+  {{page_name}} - Kyle's junk
+{% endmacro %}
+
 {% macro pagination_widget(pagination, endpoint) %}
   <ul class="pagination">
     <li {% if not pagination.has_prev %} class="disabled" {% endif %}>
@@ -31,3 +35,43 @@
     </li>
   </ul>
 {% endmacro %}
+
+{% macro form_errors(form) %}
+  {%- if form.errors %}
+    {%- for fieldname, errors in form.errors.items() %}
+      {%- if is_hidden_field(form[fieldname]) %}
+        {%- for error in errors %}
+          <dialog class="form-error">{{error}}</dialog>
+        {%- endfor %}
+      {%- endif %}
+    {%- endfor %}
+  {%- endif %}
+{%- endmacro %}
+
+{% macro form_field(field) %}
+  <li>
+    {% if field.widget.input_type == "checkbox" %}
+      {{field()|safe}}
+      <label>{{field.label.text|safe}}</label>
+    {% elif field.type == "SubmitField" %}
+      {{field()|safe}}
+    {% elif field.type != 'SubmitField' %}
+      <label>{{field.label.text|safe}}</label>
+      {{field()|safe}}
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{% macro make_form(form) %}
+  <form action="" method="post">
+    <ul>
+      {{form.hidden_tag()}}
+      {{form_errors(form)}}
+      {%- for field in form %}
+        {% if not is_hidden_field(field) -%}
+          {{form_field(field)}}
+        {%- endif %}
+      {%- endfor %}
+    </ul>
+  </form>
+{%- endmacro %}

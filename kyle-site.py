@@ -2,7 +2,10 @@ import os
 import sys
 
 import click
+import dotenv
 from flask_migrate import Migrate, upgrade
+
+dotenv.load_dotenv(dotenv.find_dotenv())
 
 import app.utils as utils
 from app import create_app, db

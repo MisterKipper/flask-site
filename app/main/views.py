@@ -199,6 +199,16 @@ def demos():
     return render_template("demos.html.j2")
 
 
+@main.route("/about-me")
+def about_me():
+    return render_template("about-me.html.j2")
+
+
+@main.route("/blog")
+def blog():
+    return render_template("blog.html.j2")
+
+
 @main.after_app_request
 def after_request(response):
     for query in get_debug_queries():
