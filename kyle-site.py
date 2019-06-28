@@ -3,7 +3,7 @@ import sys
 
 import click
 import dotenv
-from flask_migrate import Migrate, upgrade
+from flask_migrate import migrate, Migrate, upgrade
 
 dotenv.load_dotenv(dotenv.find_dotenv())
 
@@ -17,8 +17,9 @@ if os.environ.get("FLASK_COVERAGE"):
     COV = coverage.coverage(branch=True, include="app/*")
     COV.start()
 
-app = create_app(os.getenv("FLASK_ENV") or "default")
-migrate = Migrate(app, db)
+config = os.getenv("FLASK_ENV") or "development"
+app = create_app(config)
+migrate_init = Migrate(app, db)
 
 
 @app.shell_context_processor
@@ -65,10 +66,13 @@ def deploy():
 
 @app.cli.command()
 def dev_setup():
+    if config != "development":
+        raise Exception("Don't run dev-setup if not using development config!")
+    db.drop_all()
+    migrate()
     upgrade()
     Role.insert_roles()
-    if not User.query.count() > 0:
-        utils.insert_admin()
-        utils.insert_fake_users()
+    utils.insert_admin()
+    utils.insert_fake_users()
     utils.insert_fake_posts()
     utils.insert_fake_comments()

@@ -1,7 +1,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Hair'),
-         url('static/fonts/FiraSans-Hair.woff') format('woff');
+         url('../fonts/FiraSans-Hair.woff') format('woff');
     font-weight: 100;
     font-style: normal;
 }
@@ -9,7 +9,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Hair Italic'),
-         url('static/fonts/FiraSans-HairItalic.woff') format('woff');
+         url('../fonts/FiraSans-HairItalic.woff') format('woff');
     font-weight: 100;
     font-style: italic;
 }
@@ -17,7 +17,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans UltraLight'),
-         url('static/fonts/FiraSans-UltraLight.woff') format('woff');
+         url('../fonts/FiraSans-UltraLight.woff') format('woff');
     font-weight: 200;
     font-style: normal;
 }
@@ -25,7 +25,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans UltraLight Italic'),
-         url('static/fonts/FiraSans-UltraLightItalic.woff') format('woff');
+         url('../fonts/FiraSans-UltraLightItalic.woff') format('woff');
     font-weight: 200;
     font-style: italic;
 }
@@ -33,7 +33,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Light'),
-         url('static/fonts/FiraSans-Light.woff') format('woff');
+         url('../fonts/FiraSans-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
 }
@@ -41,7 +41,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Light Italic'),
-         url('static/fonts/FiraSans-LightItalic.woff') format('woff');
+         url('../fonts/FiraSans-LightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
 }
@@ -49,7 +49,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Regular'),
-         url('static/fonts/FiraSans-Regular.woff') format('woff');
+         url('../fonts/FiraSans-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
@@ -57,7 +57,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Regular Italic'),
-         url('static/fonts/FiraSans-Italic.woff') format('woff');
+         url('../fonts/FiraSans-Italic.woff') format('woff');
     font-weight: 400;
     font-style: italic;
 }
@@ -65,7 +65,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Medium'),
-         url('static/fonts/FiraSans-Medium.woff') format('woff');
+         url('../fonts/FiraSans-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
 }
@@ -73,7 +73,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Medium Italic'),
-         url('static/fonts/FiraSans-MediumItalic.woff') format('woff');
+         url('../fonts/FiraSans-MediumItalic.woff') format('woff');
     font-weight: 500;
     font-style: italic;
 }
@@ -81,7 +81,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans SemiBold'),
-         url('static/fonts/FiraSans-SemiBold.woff') format('woff');
+         url('../fonts/FiraSans-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
@@ -89,7 +89,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans SemiBold Italic'),
-         url('static/fonts/FiraSans-SemiBoldItalic.woff') format('woff');
+         url('../fonts/FiraSans-SemiBoldItalic.woff') format('woff');
     font-weight: 600;
     font-style: italic;
 }
@@ -97,7 +97,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Bold'),
-         url('static/fonts/FiraSans-Bold.woff') format('woff');
+         url('../fonts/FiraSans-Bold.woff') format('woff');
     font-weight: 700;
     font-style: normal;
 }
@@ -105,7 +105,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Bold Italic'),
-         url('static/fonts/FiraSans-BoldItalic.woff') format('woff');
+         url('../fonts/FiraSans-BoldItalic.woff') format('woff');
     font-weight: 700;
     font-style: italic;
 }
@@ -113,7 +113,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans ExtraBold'),
-         url('static/fonts/FiraSans-ExtraBold.woff') format('woff');
+         url('../fonts/FiraSans-ExtraBold.woff') format('woff');
     font-weight: 800;
     font-style: normal;
 }
@@ -121,7 +121,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans ExtraBold Italic'),
-         url('static/fonts/FiraSans-ExtraBoldItalic.woff') format('woff');
+         url('../fonts/FiraSans-ExtraBoldItalic.woff') format('woff');
     font-weight: 800;
     font-style: italic;
 }
@@ -129,7 +129,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Heavy'),
-         url('static/fonts/FiraSans-Heavy.woff') format('woff');
+         url('../fonts/FiraSans-Heavy.woff') format('woff');
     font-weight: 900;
     font-style: normal;
 }
@@ -137,7 +137,7 @@
 @font-face{
     font-family: 'Fira Sans';
     src: local('Fira Sans Heavy Italic'),
-         url('static/fonts/FiraSans-HeavyItalic.woff') format('woff');
+         url('../fonts/FiraSans-HeavyItalic.woff') format('woff');
     font-weight: 900;
     font-style: italic;
 }
@@ -145,7 +145,7 @@
 @font-face{
     font-family: 'Fira Mono';
     src: local('Fira Mono'),
-         url('static/fonts/FiraMono-Regular.woff') format('woff');
+         url('../fonts/FiraMono-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
@@ -153,7 +153,7 @@
 @font-face{
     font-family: 'Fira Mono';
     src: local('Fira Mono Bold'),
-         url('static/fonts/FiraMono-Bold.woff') format('woff');
+         url('../fonts/FiraMono-Bold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
@@ -162,7 +162,7 @@
     font-weight: 200;
     font-style: normal;
     font-stretch: normal;
-    src: url('static/fonts/SourceSerifPro-ExtraLight.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-ExtraLight.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -170,7 +170,7 @@
     font-weight: 200;
     font-style: italic;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-ExtraLightIt.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-ExtraLightIt.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -178,7 +178,7 @@
     font-weight: 300;
     font-style: normal;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-Light.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-Light.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -186,7 +186,7 @@
     font-weight: 300;
     font-style: italic;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-LightIt.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-LightIt.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -194,7 +194,7 @@
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-Regular.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-Regular.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -202,7 +202,7 @@
     font-weight: 400;
     font-style: italic;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-It.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-It.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -210,7 +210,7 @@
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-Semibold.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-Semibold.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -218,7 +218,7 @@
     font-weight: 600;
     font-style: italic;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-SemiboldIt.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-SemiboldIt.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -226,7 +226,7 @@
     font-weight: 700;
     font-style: normal;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-Bold.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-Bold.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -234,7 +234,7 @@
     font-weight: 700;
     font-style: italic;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-BoldIt.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-BoldIt.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -242,7 +242,7 @@
     font-weight: 900;
     font-style: normal;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-Black.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-Black.otf.woff2') format('woff2');
 }
 
 @font-face{
@@ -250,5 +250,5 @@
     font-weight: 900;
     font-style: italic;
     font-stretch: normal;
-    src: url('static/foonts/SourceSerifPro-BlackIt.otf.woff2') format('woff2');
+    src: url('../fonts/SourceSerifPro-BlackIt.otf.woff2') format('woff2');
 }

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from random import randint
 
@@ -5,17 +6,18 @@ from flask import current_app
 from sqlalchemy.exc import IntegrityError
 
 from . import db
-from .models import Comment, Post, User
+from .models import Comment, Post, Role, User
 
 
 def insert_admin():
-    u = User(email=current_app.config["ADMIN_ADDRESS"],
-             username="kyle",
-             password=current_app.config["ADMIN_PASSWORD"],
-             active=True,
-             member_since=datetime.utcnow())
-    db.session.add(u)
-    db.session.commit()
+    if not User.query.filter_by(username=os.environ["ADMIN_USERNAME"]).first():
+        u = User(email=os.environ["ADMIN_ADDRESS"],
+                 username="kyle",
+                 password=os.environ["ADMIN_PASSWORD"],
+                 active=True,
+                 member_since=datetime.utcnow())
+        db.session.add(u)
+        db.session.commit()
 
 
 def insert_fake_users(count=100):
@@ -42,9 +44,15 @@ def insert_fake_users(count=100):
 def insert_fake_posts(count=100):
     from faker import Faker
     fake = Faker()
-    u = User.query.filter_by(role="admin")
+    admin = Role.query.filter_by(name="admin").first()
+    u = User.query.filter_by(role=admin).first()
     for i in range(count):
-        p = Post(body=fake.text(), timestamp=fake.past_datetime(), author=u)
+        body = fake.text(max_nb_chars=1000)
+        p = Post(title=fake.text(max_nb_chars=80),
+                 body=body,
+                 summary=body[:200],
+                 timestamp=fake.past_datetime(),
+                 author=u)
         db.session.add(p)
     db.session.commit()
 

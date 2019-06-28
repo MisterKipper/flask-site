@@ -30,12 +30,15 @@ body > :last-child {
 }
 .navbar > ul {
     list-style: none;
-    margin: 0; /*1rem;*/
+    margin: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-inline-start: 0;
 }
 .navbar > ul > li {
     display: inline-block;
-    margin-left: -1rem;
-    margin-right: 2rem;
+    margin-left: 1rem;
+    margin-right: 0rem;
 }
 .navbar > ul > li > a {
     color: #EAF;
@@ -49,6 +52,7 @@ main {
 }
 footer {
     background-color: #f5f5f5;
+    margin-bottom: 1rem;
 }
 footer {
     padding-left: 2rem;
@@ -71,19 +75,6 @@ a {
 a:focus, a:hover {
     text-decoration: underline;
 }
-button {
-    background-color: #e6e6e6;
-    border-color: #adadad;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 0.5rem;
-    padding: 0.4rem 0.8rem;
-    font-family: inherit;
-    font-size: inherit;
-}
-button:focus, button:hover {
-    background-color: #F9F9F9
-}
 code, samp {
     font-family: 'Fira Mono', monospace;
     background-color: #FCF;
@@ -93,7 +84,7 @@ code, samp {
 form {
     margin: 0 auto;
     font-family: "Fira Sans"
-    width: 400px;
+                     width: 400px;
 }
 form ul {
     margin: 0;
@@ -119,6 +110,20 @@ input:enabled {
 input[type="checkbox"] {
     display: inline-block;
 }
+input[type="submit"] {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    font-family: inherit;
+    font-size: inherit;
+}
+input[type="submit"]:focus, input[type="submit"]:hover {
+    background-color: #F9F9F9
+}
 label {
     display: relative;
 }
@@ -136,4 +141,22 @@ div.demo-description {
 }
 ul.blog-posts {
     list-style: none;
+    padding-inline-start: 0;
+}
+li.post {
+    border-bottom-color: #d6d6d6;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.post h2 {
+    margin-bottom: 0;
+}
+/* div.pagination { */
+/*     display: inline-block; */
+/* } */
+ul.pagination {
+    list-style: none;
+}
+ul.pagination > li {
+    display: inline;
 }

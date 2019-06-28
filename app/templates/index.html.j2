@@ -3,12 +3,6 @@
 
 {% set title = "Home" %}
 {% block content %}
-  <div>
-    {% if current_user.can(Permission.WRITE) %}
-      {{macros.make_form(form)}}
-    {% endif %}
-  </div>
-
   {% include "_posts.html.j2" %}
   <div class="pagination">
     {{macros.pagination_widget(pagination, ".index")}}

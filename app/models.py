@@ -157,7 +157,7 @@ class Role(db.Model):
             role.reset_permissions()
             for perm in roles[r]:
                 role.add_permission(perm)
-            role.default = (role.name == default_role)
+            role.default = role.name == default_role
             db.session.add(role)
         db.session.commit()
 
@@ -176,26 +176,16 @@ class Permission:
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
-    body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    body = db.Column(db.Text)
+    summary = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     comments = db.relationship("Comment", backref="post", lazy="dynamic")
-
-    @staticmethod
-    def on_change_body(target, value, oldvalue, initiator):
-        allowed_tags = [
-            'a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre',
-            'strong', 'ul', 'h1', 'h2', 'h3', 'p'
-        ]
-        target.body_html = bleach.linkify(
-            bleach.clean(markdown(value, output_format="html"), tags=allowed_tags, strip=True))
 
     def to_dict(self):
         post = {
             "url": url_for("api.get_post", id=self.id),
             "body": self.body,
-            "body_html": self.body_html,
             "timestamp": self.timestamp,
             "author_url": url_for("api.get_user", id=self.author_id),
             "comments_url": url_for("api.get_comments", id=self.id),
@@ -211,7 +201,7 @@ class Post(db.Model):
         return Post(body=body)
 
     def __repr__(self):
-        return "<Post {}, {}>".format(self.author_id, self.timestamp)
+        return f"<Post {self.author_id}, {self.timestamp}>"
 
 
 class Comment(db.Model):
@@ -262,5 +252,4 @@ def load_user(id):
 
 login.anonymous_user = AnonymousUser
 
-db.event.listen(Post.body, "set", Post.on_change_body)
 db.event.listen(Comment.body, "set", Comment.on_change_body)

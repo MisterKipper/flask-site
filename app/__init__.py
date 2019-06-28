@@ -19,7 +19,7 @@ pagedown = PageDown()
 
 
 def create_app(config_name):
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path="", static_folder="static")
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 

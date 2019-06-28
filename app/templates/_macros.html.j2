@@ -55,7 +55,7 @@
       <label>{{field.label.text|safe}}</label>
     {% elif field.type == "SubmitField" %}
       {{field()|safe}}
-    {% elif field.type != 'SubmitField' %}
+    {% else %}
       <label>{{field.label.text|safe}}</label>
       {{field()|safe}}
     {% endif %}
