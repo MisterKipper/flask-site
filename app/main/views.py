@@ -33,18 +33,19 @@ def user(username):
 
 
 @main.route("/post/<int:id>", methods=["GET", "POST"])
-@login_required
 def post(id):
     post = Post.query.get_or_404(id)
     form = CommentForm()
     if form.validate_on_submit():
+        if not current_user.is_authenticated:
+            return current_app.login_manager.unauthorized()
         comment = Comment(author=current_user._get_current_object(), post=post, body=form.body.data)
         db.session.add(comment)
         db.session.commit()
         flash("Comment added.")
         return redirect(url_for(".post", id=post.id, page=-1))
     comments = post.comments.filter_by(parent=None).order_by(Comment.timestamp.desc())
-    return render_template("post.html.j2", posts=[post], form=form, comments=comments)
+    return render_template("post.html.j2", post=post, form=form, comments=comments)
 
 
 @main.route("/post/edit/<int:id>", methods=["GET", "POST"])
