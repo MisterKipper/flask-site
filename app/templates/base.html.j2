@@ -50,10 +50,6 @@
     <footer>
       <p>&copy; 2019 Kyle F. Davies</p>
     </footer>
-    {% block scripts %}
-    <script src="{{url_for('static', filename='js/Markdown.Converter.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/Markdown.Sanitizer.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
-    {% endblock %}
+    {% block scripts %}{% endblock %}
   </body>
 </html>

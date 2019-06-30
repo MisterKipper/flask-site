@@ -3,13 +3,12 @@
 
 {% set title = "Home" %}
 {% block content %}
-  {% include "_posts.html.j2" %}
-  <div class="pagination">
-    {{macros.pagination_widget(pagination, ".index")}}
-  </div>
+{% include "_posts.html.j2" %}
+<div class="pagination">
+  {{macros.pagination_widget(pagination, ".index")}}
+</div>
 {% endblock %}
 
 {% block scripts %}
-  {{super()}}
-  {{pagedown.include_pagedown()}}
+<script src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
 {% endblock %}

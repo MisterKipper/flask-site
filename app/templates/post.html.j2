@@ -1,12 +1,18 @@
 {% extends "base.html.j2" %}
 {% import "_macros.html.j2" as macros %}
 
-{% set title = "Post" %}
+{% set title = post.title %}
+
+{% block page_header %}
+{{post.title}}
+{% endblock %}
 
 {% block content %}
-{% include "_posts.html.j2" %}
+<article>
+  {{post.body}}
+</article>
 <div class="comments">
-  <h4 id="comments">Comments</h4>
+  <h3 id="comments">Comments</h3>
   {% if current_user.can(Permission.COMMENT) %}
   {{macros.make_form(form)}}
   {% endif %}
@@ -15,6 +21,5 @@
 {% endblock %}
 
 {% block scripts %}
-{{super()}}
-{{pagedown.include_pagedown()}}
+<script src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
 {% endblock %}
