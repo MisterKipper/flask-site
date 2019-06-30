@@ -209,30 +209,16 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
     disabled = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     edit_time = db.Column(db.DateTime)
     parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"), index=True)
     parent = db.relationship("Comment", remote_side=id, backref="children")
 
-    @staticmethod
-    def on_change_body(target, value, oldvalue, initiator):
-        allowed_tags = [
-            'a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre',
-            'strong', 'ul', 'p'
-        ]
-        if target.body_html:
-            target.edit_time = datetime.utcnow()
-
-        target.body_html = bleach.linkify(
-            bleach.clean(markdown(value, output_format="html"), tags=allowed_tags, strip=True))
-
     def to_dict(self):
         comment_dict = {
             "url": url_for("api.get_comment", id=self.id),
             "body": self.body,
-            "body_html": self.body_html,
             "author_url": url_for("api.get_user", id=self.author_id),
             "post_url": url_for("api.get_post", id=self.post_id),
             "disabled": self.disabled,
@@ -251,5 +237,3 @@ def load_user(id):
 
 
 login.anonymous_user = AnonymousUser
-
-db.event.listen(Comment.body, "set", Comment.on_change_body)
