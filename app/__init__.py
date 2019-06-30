@@ -1,9 +1,7 @@
 from flask import Flask
-# from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
-from flask_pagedown import PageDown
 from flask_sqlalchemy import SQLAlchemy
 
 from config import config
@@ -12,10 +10,8 @@ from .jinja_utils import jinja_init
 db = SQLAlchemy()
 login = LoginManager()
 login.login_view = "auth.login"
-# bootstrap = Bootstrap()
 moment = Moment()
 mail = Mail()
-pagedown = PageDown()
 
 
 def create_app(config_name):
@@ -28,7 +24,6 @@ def create_app(config_name):
     moment.init_app(app)
     db.init_app(app)
     login.init_app(app)
-    pagedown.init_app(app)
     if app.config["SSL_REDIRECT"]:
         from flask_sslify import SSLify
         sslify = SSLify(app)

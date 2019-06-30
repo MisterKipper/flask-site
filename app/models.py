@@ -5,7 +5,6 @@ import bleach
 from flask import current_app, url_for
 from flask_login import AnonymousUserMixin, UserMixin
 from itsdangerous import BadData, TimedJSONWebSignatureSerializer
-from markdown import markdown
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, login

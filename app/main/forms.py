@@ -1,6 +1,5 @@
 import wtforms
 import wtforms.validators as validators
-from flask_pagedown.fields import PageDownField
 from flask_wtf import FlaskForm
 from wtforms import (BooleanField, SelectField, StringField, SubmitField, TextAreaField)
 
@@ -48,7 +47,7 @@ class EditProfileAdminForm(EditProfileForm):
 
 
 class PostForm(FlaskForm):
-    body = PageDownField("Post text goes here.", validators=[validators.DataRequired()])
+    body = TextAreaField("Post text goes here.", validators=[validators.DataRequired()])
     submit = SubmitField("Submit")
 
 
