@@ -1,77 +1,77 @@
 {% macro title(page_name) %}
-  {{page_name}} - Kyle's junk
+{{page_name}} - Kyle's junk
 {% endmacro %}
 
 {% macro pagination_widget(pagination, endpoint) %}
-  <ul class="pagination">
-    <li {% if not pagination.has_prev %} class="disabled" {% endif %}>
-      <a href="{% if pagination.has_prev %}
-               {{url_for(endpoint, page=pagination.page - 1, **kwargs)}}
-             {% else%}
-               #
-             {% endif %}">
-             &laquo;
-      </a>
-    </li>
-    {% for p in pagination.iter_pages() %}
-      {% if p %}
-        {% if p == pagination.page %}
-          <li class="active"><a href="{{url_for(endpoint, page=p, **kwargs)}}">{{p}}</a></li>
-        {% else %}
-          <li><a href="{{url_for(endpoint, page=p, **kwargs)}}">{{p}}</a></li>
-        {% endif %}
-      {% else %}
-        <li class="disabled"><a href="#">&hellip;</a></li>
-      {% endif %}
-    {% endfor %}
-    <li {% if not pagination.has_next %} class="disabled" {% endif %}>
-      <a href="{% if pagination.has_next %}
-               {{url_for(endpoint, page=pagination.page + 1, **kwargs)}}
-             {% else %}
-               #
-             {% endif %}">
-             &raquo;
-      </a>
-    </li>
-  </ul>
+<ul class="pagination">
+  <li {% if not pagination.has_prev %} class="disabled" {% endif %}>
+    <a href="{% if pagination.has_prev %}
+             {{url_for(endpoint, page=pagination.page - 1, **kwargs)}}
+    {% else%}
+             #
+    {% endif %}">
+      &laquo;
+    </a>
+  </li>
+  {% for p in pagination.iter_pages() %}
+  {% if p %}
+  {% if p == pagination.page %}
+  <li class="active"><a href="{{url_for(endpoint, page=p, **kwargs)}}">{{p}}</a></li>
+  {% else %}
+  <li><a href="{{url_for(endpoint, page=p, **kwargs)}}">{{p}}</a></li>
+  {% endif %}
+  {% else %}
+  <li class="disabled"><a href="#">&hellip;</a></li>
+  {% endif %}
+  {% endfor %}
+  <li {% if not pagination.has_next %} class="disabled" {% endif %}>
+    <a href="{% if pagination.has_next %}
+             {{url_for(endpoint, page=pagination.page + 1, **kwargs)}}
+    {% else %}
+             #
+    {% endif %}">
+      &raquo;
+    </a>
+  </li>
+</ul>
 {% endmacro %}
 
 {% macro form_errors(form) %}
-  {%- if form.errors %}
-    {%- for fieldname, errors in form.errors.items() %}
-      {%- if is_hidden_field(form[fieldname]) %}
-        {%- for error in errors %}
-          <dialog class="form-error">{{error}}</dialog>
-        {%- endfor %}
-      {%- endif %}
-    {%- endfor %}
-  {%- endif %}
+{%- if form.errors %}
+{%- for fieldname, errors in form.errors.items() %}
+{%- if is_hidden_field(form[fieldname]) %}
+{%- for error in errors %}
+<dialog class="form-error">{{error}}</dialog>
+{%- endfor %}
+{%- endif %}
+{%- endfor %}
+{%- endif %}
 {%- endmacro %}
 
 {% macro form_field(field) %}
-  <li>
-    {% if field.widget.input_type == "checkbox" %}
-      {{field()|safe}}
-      <label>{{field.label.text|safe}}</label>
-    {% elif field.type == "SubmitField" %}
-      {{field()|safe}}
-    {% else %}
-      <label>{{field.label.text|safe}}</label>
-      {{field()|safe}}
-    {% endif %}
-  </li>
+<li>
+  {% if field.widget.input_type == "checkbox" %}
+  {{field()|safe}}
+  <label>{{field.label.text|safe}}</label>
+  {% elif field.type == "SubmitField" %}
+  {{field()|safe}}
+  {% else %}
+  <label>{{field.label.text|safe}}</label>
+  {{field()|safe}}
+  {% endif %}
+</li>
 {% endmacro %}
 
 {% macro make_form(form) %}
-  <form action="" method="post">
-    <ul>
-      {{form.hidden_tag()}}
-      {{form_errors(form)}}
-      {%- for field in form %}
-        {% if not is_hidden_field(field) -%}
-          {{form_field(field)}}
-        {%- endif %}
-      {%- endfor %}
-    </ul>
-  </form>
+<form action="" method="post">
+  <ul>
+    {{form.hidden_tag()}}
+    {{form_errors(form)}}
+    {%- for field in form %}
+    {% if not is_hidden_field(field) -%}
+    {{form_field(field)}}
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</form>
 {%- endmacro %}

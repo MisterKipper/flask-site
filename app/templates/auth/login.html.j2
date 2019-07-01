@@ -5,6 +5,6 @@
 {% block page_header %}Log In{% endblock %}
 
 {% block content %}
-  {{macros.make_form(form)}}
-  <p>New user? <a href="{{url_for('.register')}}">Click to register.</a> </p>
+{{macros.make_form(form)}}
+<p>New user? <a href="{{url_for('.register')}}">Click to register.</a> </p>
 {% endblock %}

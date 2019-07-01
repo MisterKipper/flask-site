@@ -3,19 +3,19 @@
 {% set title = "Demos" %}
 
 {% block content %}
-  <ul class="demos">
-    <li class="demo">
-      <div class="demo-thumbnail">
-        <a href="/demos/stars">
-          <img class="demo-thumbnail" src="{{url_for('static', filename='img/stars-thumbnail.png')}}">
-        </a>
-      </div>
-      <div class="demo-description">
-        <h2><a href="/demos/stars">HTML5 star map</a></h2>
-        <p>
-          A visualization of the night sky, using the HTML <code>canvas</code> tag. A description of how I made this is available <a href="/posts/1">here</a>.
-        </p>
-      </div>
-    </li>
-  </ul>
+<ul class="demos">
+  <li class="demo">
+    <div class="demo-thumbnail">
+      <a href="/demos/stars">
+        <img class="demo-thumbnail" src="{{url_for('static', filename='img/stars-thumbnail.png')}}">
+      </a>
+    </div>
+    <div class="demo-description">
+      <h2><a href="/demos/stars">HTML5 star map</a></h2>
+      <p>
+        A visualization of the night sky, using the HTML <code>canvas</code> tag. A description of how I made this is available <a href="/posts/1">here</a>.
+      </p>
+    </div>
+  </li>
+</ul>
 {% endblock %}

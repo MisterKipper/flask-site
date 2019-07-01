@@ -43,11 +43,10 @@ def register():
         return redirect(url_for("main.index"))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(
-            username=form.username.data,
-            password=form.password.data,
-            email=form.email.data,
-            active=False)
+        user = User(username=form.username.data,
+                    password=form.password.data,
+                    email=form.email.data,
+                    active=False)
         db.session.add(user)
         db.session.commit()
         flash("You have registered for my site. "
@@ -91,11 +90,10 @@ def inactive():
 @login_required
 def resend_activation():
     token = current_user.generate_activation_token()
-    send_email(
-        current_user.email,
-        "Account activation",
-        "auth/email/activate",
-        user=current_user,
-        token=token)
+    send_email(current_user.email,
+               "Account activation",
+               "auth/email/activate",
+               user=current_user,
+               token=token)
     flash("A new activation link has been sent to you by email")
     return redirect(url_for("main.index"))
