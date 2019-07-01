@@ -34,7 +34,7 @@ class FlaskClientTestCase(unittest.TestCase):
 
     @staticmethod
     def add_post(author, body="original-post"):
-        p = Post(body=body, author=author)
+        p = Post(body=body, author=author, title="title")
         db.session.add(p)
         db.session.commit()
         return p
@@ -134,14 +134,12 @@ class FlaskClientTestCase(unittest.TestCase):
 
         # Test making post
         self.login()
-        response = self.client.post("/",
-                                    data={"body": "# Test post\n- Testing\n- testing"},
-                                    follow_redirects=True)
+        body = "Test post\nTesting\nTesting"
+        response = self.client.post("/", data={"body": body}, follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         p = Post.query.order_by(Post.timestamp.desc()).first()
         self.assertEqual(p.author, u)
-        self.assertEqual(p.body_html,
-                         "<h1>Test post</h1>\n<ul>\n<li>Testing</li>\n<li>testing</li>\n</ul>")
+        self.assertEqual(p.body, body)
 
     def test_edit_post(self):
         u = self.add_user()

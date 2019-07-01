@@ -47,13 +47,3 @@ class UserModelTestCase(unittest.TestCase):
         u = AnonymousUser()
         for perm in ["FOLLOW", "COMMENT", "WRITE", "MODERATE", "ADMIN"]:
             self.assertFalse(u.can(getattr(Permission, perm)))
-
-    def test_to_dict(self):
-        u = User(email="example@example.com", password="user")
-        db.session.add(u)
-        db.session.commit()
-        with self.app.test_request_context("/"):
-            json_user = u.to_dict()
-        expected_keys = ["last_seen", "member_since", "post_count", "posts_url", "url", "username"]
-        self.assertEqual(sorted(json_user.keys()), sorted(expected_keys))
-        self.assertEqual(f"/api/v1/users/{u.id}", json_user["url"])
