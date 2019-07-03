@@ -59,6 +59,7 @@ def register():
 @login_required
 def activate(token):
     if current_user.active:
+        flash("This user account has already been activated.")
         return redirect(url_for("main.index"))
     if current_user.activate(token):
         db.session.commit()
