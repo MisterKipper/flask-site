@@ -1,5 +1,5 @@
 'use strict';
-moment.locale("en");
+moment.locale("en_GB");
 
 function flask_moment_render(el) {
     el.textContent = eval('moment("' + el.getAttribute('data-timestamp') + '").' + el.getAttribute('data-format') + ';');
