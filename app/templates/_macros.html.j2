@@ -41,7 +41,7 @@
 {%- for fieldname, errors in form.errors.items() %}
 {%- if is_hidden_field(form[fieldname]) %}
 {%- for error in errors %}
-<dialog class="form-error">{{error}}</dialog>
+<dialog class="form-error" open="">{{error}}</dialog>
 {%- endfor %}
 {%- endif %}
 {%- endfor %}
@@ -62,6 +62,12 @@
     {{field.label.text|safe}}
     {{field()|safe}}
   </label>
+  {%- for error in field.errors %}
+  <dialog class="form-error" open="">
+    {{error}}
+    <button class="dialog-dismiss">×</button>
+  </dialog>
+  {% endfor %}
   {% endif %}
 </li>
 {% endmacro %}
@@ -69,7 +75,9 @@
 {% macro make_form(form) %}
 <form action="" method="post">
   <ul>
-    {{form.hidden_tag()}}
+    <li>
+      {{form.hidden_tag()}}
+    </li>
     {{form_errors(form)}}
     {%- for field in form %}
     {% if not is_hidden_field(field) -%}

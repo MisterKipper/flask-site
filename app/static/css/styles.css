@@ -126,11 +126,12 @@ input[type="submit"] {
     border-radius: 0.5rem;
     cursor: pointer;
     padding: 0.4rem 0.8rem;
-    font-family: inherit;
-    font-size: inherit;
 }
 input[type="submit"]:focus, input[type="submit"]:hover {
     background-color: #F9F9F9
+}
+.dialog-dismiss {
+    float: right;
 }
 ul.demos {
     list-style: none;

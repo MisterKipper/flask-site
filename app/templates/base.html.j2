@@ -30,7 +30,10 @@
       {%- with messages = get_flashed_messages() %}
       {%- if messages %}
       {%- for message in messages %}
-      <dialog class="alert alert-info" role="alert">{{message}}</dialog>
+      <dialog class="alert alert-info" open="" role="alert">
+        {{message}}
+        <button class="dialog-dismiss">×</button>
+      </dialog>
       {% endfor %}
       {% endif %}
       {%- endwith %}
@@ -50,6 +53,8 @@
     <footer>
       <p>&copy; 2019 Kyle F. Davies</p>
     </footer>
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+    <script src="{{url_for('static', filename='js/modals.js')}}"></script>
+    {% endblock %}
   </body>
 </html>
