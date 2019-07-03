@@ -1,9 +1,11 @@
 import unittest
 
+from flask import url_for
+
 from app import create_app, db
 from app.exceptions import ValidationError
 from app.models import Comment, Post, Role, User
-from app.auth.forms import RegistrationForm
+from app.auth.forms import LoginForm, RegistrationForm
 
 
 class FlaskClientTestCase(unittest.TestCase):
@@ -77,10 +79,66 @@ class FlaskClientTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("Account activated." in response.get_data(as_text=True))
 
-        # Test logout
+        # Test login redirect when authenticated
+        response = self.client.get("/auth/login", follow_redirects=False)
+        self.assertEqual(response.status_code, 302)
+        with self.app.test_request_context():
+            self.assertEqual(response.location, url_for("main.index", _external=True))
+
+        # Test login redirect when authenticated
+        response = self.client.get("/auth/register", follow_redirects=False)
+        self.assertEqual(response.status_code, 302)
+        with self.app.test_request_context():
+            self.assertEqual(response.location, url_for("main.index", _external=True))
+
+            # Test logout
         response = self.client.get("/auth/logout", follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue("You have been logged out." in response.get_data(as_text=True))
+
+    def test_invalid_login(self):
+        u = self.add_user()
+
+        response = self.client.post("/auth/login",
+                                    data={
+                                        "username": "arthur",
+                                        "password": "abc"
+                                    },
+                                    follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("Invalid username or password" in response.get_data(as_text=True))
+
+        response = self.client.post("/auth/login",
+                                    data={
+                                        "username": "brian",
+                                        "password": "xyz"
+                                    },
+                                    follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("Invalid username or password" in response.get_data(as_text=True))
+
+    def test_invalid_registration(self):
+        u = self.add_user()
+
+        response = self.client.post("/auth/register",
+                                    data={
+                                        "username": "brian",
+                                        "email": "arthur@example.com",
+                                        "password": "abc",
+                                        "password2": "abc"
+                                    },
+                                    follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("Invalid username or password" in response.get_data(as_text=True))
+
+        response = self.client.post("/auth/login",
+                                    data={
+                                        "username": "brian",
+                                        "password": "xyz"
+                                    },
+                                    follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("Invalid username or password" in response.get_data(as_text=True))
 
     def test_registration_form(self):
         # Add user
