@@ -8,7 +8,6 @@ function flask_moment_render(el) {
 }
 
 function flask_moment_render_all() {
-    var l = [];
     document.querySelectorAll('.flask-moment').forEach(function(el) {
         flask_moment_render(el);
         if (el.getAttribute('data-refresh')) {
