@@ -36,6 +36,7 @@ class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = (os.environ.get("TEST_DATABASE_URL") or "sqlite://")
     WTF_CSRF_ENABLED = False
+    SSL_REDIRECT = True
 
 
 class ProductionConfig(Config):
@@ -66,7 +67,6 @@ class ProductionConfig(Config):
                                    secure=secure)
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
-        # TODO: Add handler for lower-level log messages.
 
 
 config = {
