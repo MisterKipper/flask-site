@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from hashlib import md5
 
@@ -181,24 +182,6 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     comments = db.relationship("Comment", backref="post", lazy="dynamic")
 
-    def to_dict(self):
-        post = {
-            "url": url_for("api.get_post", id=self.id),
-            "body": self.body,
-            "timestamp": self.timestamp,
-            "author_url": url_for("api.get_user", id=self.author_id),
-            "comments_url": url_for("api.get_comments", id=self.id),
-            "comment_count": self.comments.count(),
-        }
-        return post
-
-    @staticmethod
-    def from_json(json_post):
-        body = json_post.get("body")
-        if body is None or body == "":
-            raise ValidationError("Post does not have a body")
-        return Post(body=body)
-
     def __repr__(self):
         return f"<Post {self.author_id}, {self.timestamp}>"
 
@@ -208,23 +191,20 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     body = db.Column(db.Text)
+    body_html = db.Column(db.Text)
     disabled = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     edit_time = db.Column(db.DateTime)
     parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"), index=True)
     parent = db.relationship("Comment", remote_side=id, backref="children")
 
-    def to_dict(self):
-        comment_dict = {
-            "url": url_for("api.get_comment", id=self.id),
-            "body": self.body,
-            "author_url": url_for("api.get_user", id=self.author_id),
-            "post_url": url_for("api.get_post", id=self.post_id),
-            "disabled": self.disabled,
-            "timestamp": self.timestamp,
-            "edit_time": self.edit_time
-        }
-        return comment_dict
+    @staticmethod
+    def on_change_body(target, value, oldvalue, initiator):
+        if not target.edit_time:
+            target.edit_time = datetime.utcnow()
+        r = re.compile(r"\n+")
+        target.body_html = "<p>" + bleach.linkify(
+            r.sub("</p><p>", bleach.clean(value.strip(), tags=[]))) + "</p>"
 
     def __repr__(self):
         return f"<Comment {self.id}>"
@@ -236,3 +216,5 @@ def load_user(id):
 
 
 login.anonymous_user = AnonymousUser
+
+db.event.listen(Comment.body, "set", Comment.on_change_body)

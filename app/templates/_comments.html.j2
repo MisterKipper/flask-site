@@ -20,7 +20,7 @@
           <p><i>Comment deleted.</i></p>
           {% endif %}
           {% if moderate or not comment.disabled %}
-          {{comment.body}}
+          {{comment.body_html}}
           {% endif %}
         </div>
         <div class="comment-footer">
