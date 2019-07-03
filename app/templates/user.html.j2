@@ -1,12 +1,13 @@
 {% extends "base.html.j2" %}
 
-{% set title = user.username %}
-
+{% set title = "User " + user.username %}
+{% block page_header %}
+User {{user.username}}'s profile
+{% endblock %}
 {% block content %}
 <div class="page-header">
   <img class="img-rounded profile-thumbnail" src="{{user.avatar(256)}}">
   <div class="profile-header">
-    <h1>{{user.username}}</h1>
     {% if user.name or user.location %}
     <p>
       {% if user.name %}{{user.name}}{% endif %}

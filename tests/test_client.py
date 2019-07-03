@@ -129,7 +129,6 @@ class FlaskClientTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_make_post(self):
-        # TODO: Test lack of permissions, unactivated account, etc.
         u = self.add_user()
 
         # Test making post
@@ -236,4 +235,4 @@ class FlaskClientTestCase(unittest.TestCase):
 
         self.login()
         response = self.client.get("/user/brian")
-        self.assertTrue("<title>brian - Kyle's junk</title>" in response.get_data(True))
+        self.assertTrue("<title>User brian - Kyle's junk</title>" in response.get_data(True))
