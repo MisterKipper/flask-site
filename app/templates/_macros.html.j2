@@ -51,13 +51,17 @@
 {% macro form_field(field) %}
 <li>
   {% if field.widget.input_type == "checkbox" %}
-  {{field()|safe}}
-  <label>{{field.label.text|safe}}</label>
+  <label>
+    {{field()|safe}}
+    {{field.label.text|safe}}
+  </label>
   {% elif field.type == "SubmitField" %}
   {{field()|safe}}
   {% else %}
-  <label>{{field.label.text|safe}}</label>
-  {{field()|safe}}
+  <label>
+    {{field.label.text|safe}}
+    {{field()|safe}}
+  </label>
   {% endif %}
 </li>
 {% endmacro %}
