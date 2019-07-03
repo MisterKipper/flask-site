@@ -76,7 +76,7 @@ class User(UserMixin, db.Model):
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode("utf-8")).hexdigest()
-        return "https://www.gravatar.com/avatar/{}?d=identicon&s={}".format(digest, size)
+        return f"https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}"
 
     def can(self, perm):
         return self.role and self.role.has_permission(perm)
@@ -101,7 +101,7 @@ class User(UserMixin, db.Model):
         return user
 
     def __repr__(self):
-        return "<User {}>".format(self.username)
+        return f"<User {self.username}>"
 
 
 class AnonymousUser(AnonymousUserMixin):
@@ -161,7 +161,7 @@ class Role(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Role {}>".format(self.name)
+        return f"<Role {self.name}>"
 
 
 class Permission:
@@ -227,7 +227,7 @@ class Comment(db.Model):
         return comment_dict
 
     def __repr__(self):
-        return "<Comment {}>".format(self.id)
+        return f"<Comment {self.id}>"
 
 
 @login.user_loader
