@@ -11,7 +11,6 @@ from .forms import LoginForm, RegistrationForm
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
-    # TODO: Check safe redirects
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
 
@@ -38,7 +37,6 @@ def logout():
 
 @auth.route("/register", methods=["GET", "POST"])
 def register():
-    # TODO: Check safe redirects
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     form = RegistrationForm()
