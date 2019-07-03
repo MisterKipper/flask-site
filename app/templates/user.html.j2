@@ -5,7 +5,6 @@
 User {{user.username}}'s profile
 {% endblock %}
 {% block content %}
-<div class="page-header">
   <img class="img-rounded profile-thumbnail" src="{{user.avatar(256)}}">
   <div class="profile-header">
     {% if user.name or user.location %}
@@ -34,11 +33,10 @@ User {{user.username}}'s profile
     </a>
     {%- endif -%}
   </div>
-</div>
-<div class="page-content">
-  <h3>Posts by {{user.username}}</h3>
+<main>
+  <h2>Posts by {{user.username}}</h2>
   {% include "_posts.html.j2" %}
-</div>
+</main>
 {% endblock %}
 {% block scripts %}
 <script src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
