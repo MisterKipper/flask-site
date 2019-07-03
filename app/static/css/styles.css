@@ -1,8 +1,16 @@
 :root {
-    font-family: 'Source Serif Pro', serif;
+    --font-serif: 'Source Serif Pro', serif;
+    --font-sans: 'Fira Sans', sans-serif;
+    --font-mono: 'Fira Mono', monospace;
+    --thin-border: 0.0625rem;
+    font-family: var(--font-serif);
+    font-size: calc(1rem + 0.5vw);
     line-height: 1.5;
     background-color: #FFF;
     color: #333;
+}
+* {
+    box-sizing: border-box;
 }
 body {
     display: flex;
@@ -24,7 +32,7 @@ body > :last-child {
     flex-direction: row;
     justify-content: space-between;
     background-color: #425;
-    font-family: "Fira Sans", sans-serif;
+    font-family: var(--font-sans);
     border-radius: 0.5rem;
     padding: 1rem;
 }
@@ -47,8 +55,9 @@ body > :last-child {
     margin: 0;
 }
 main {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60ch;
 }
 footer {
     background-color: #f5f5f5;
@@ -61,13 +70,13 @@ footer > p {
     margin: 0;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fira', sans-serif;
+    font-family: var(--font-sans);
 }
 h1 {
     border-bottom-color: #adadad;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
-    padding-bottom: 0.5em;
+    border-width: var(--thin-border);
+    padding-bottom: 0.5rem;
 }
 a {
     text-decoration: none;
@@ -76,38 +85,35 @@ a:focus, a:hover {
     text-decoration: underline;
 }
 code, samp {
-    font-family: 'Fira Mono', monospace;
+    font-family: var(--font-mono);
     background-color: #FCF;
     border-radius: 0.5rem;
-    padding: 1px;
+    padding: var(-hr-width);
 }
 form {
-    margin: 0 auto;
-    font-family: "Fira Sans"
-                     width: 400px;
+    font-family: var(--font-sans);
+    width: 20rem;
 }
 form ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-form li {
-    margin: 0.5em;
-}
 input {
     display: block;
     border-color: #adadad;
     border-style: solid;
-    border-width: 1px;
+    border-width: var(--thin-border);
     border-radius: 0.5rem;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    padding: 0.5em;
-    margin: 0.5em 0;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
-input:enabled {
-    
+input[type="text"], input[type="password"] {
+    width: 100%;
 }
 input[type="checkbox"] {
     display: inline-block;
@@ -116,7 +122,7 @@ input[type="submit"] {
     background-color: #e6e6e6;
     border-color: #adadad;
     border-style: solid;
-    border-width: 1px;
+    border-width: var(--thin-border);
     border-radius: 0.5rem;
     cursor: pointer;
     padding: 0.4rem 0.8rem;
@@ -126,20 +132,17 @@ input[type="submit"] {
 input[type="submit"]:focus, input[type="submit"]:hover {
     background-color: #F9F9F9
 }
-label {
-    display: relative;
-}
 ul.demos {
     list-style: none;
 }
 div.demo-thumbnail {
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
 }
 div.demo-description {
-    margin-left: 48px;
-    min-height: 48px;
+    margin-left: 3rem;
+    min-height: 3rem;
 }
 ul.blog-posts {
     list-style: none;
@@ -148,7 +151,7 @@ ul.blog-posts {
 li.post {
     border-bottom-color: #d6d6d6;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-width: var(--thin-border);
 }
 .post h2 {
     margin-bottom: 0;
@@ -172,4 +175,11 @@ textarea {
     border-radius: 0.5rem;
     padding: 0.5rem;
     width: 100%
+}
+.profile-thumbnail {
+    position: absolute;
+}
+.profile-header {
+    min-height: 16.5rem;
+    margin-left: 18rem;
 }
