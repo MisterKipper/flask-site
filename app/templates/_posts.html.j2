@@ -2,7 +2,7 @@
   {% for post in posts %}
   <li class="post">
     <div class="post-content">
-      <h2><a href="{{url_for('.post', id=post.id)}}">{{post.title}}</a></h2>
+      <h2><a href="{{url_for('.post', slug=post.slug)}}">{{post.title}}</a></h2>
       <div class="post-author">
         <a href="{{url_for('.user', username=post.author.username)}}">
           {{post.author.username}}
@@ -14,18 +14,18 @@
         <p>{{post.summary}}</p>
       </div>
       <nav class="post-footer">
-        <a href="{{url_for('.post', id=post.id)}}" class="label label-default">
+        <a href="{{url_for('.post', slug=post.slug)}}" class="label label-default">
           Permalink
         </a>
-        <a href="{{url_for('.post', id=post.id)}}#comments" class="label label-primary">
+        <a href="{{url_for('.post', slug=post.slug)}}#comments" class="label label-primary">
           {{post.comments.count()}} Comments
         </a>
         {% if current_user == post.author %}
-        <a href="{{url_for('.edit_post', id=post.id)}}" class="label label-primary">
+        <a href="{{url_for('.edit_post', slug=post.slug)}}" class="label label-primary">
           Edit
         </a>
         {% elif current_user.is_admin() %}
-        <a href="{{url_for('.edit_post', id=post.id)}}" class="label label-danger">
+        <a href="{{url_for('.edit_post', slug=post.slug)}}" class="label label-danger">
           Edit [Admin]
         </a>
         {% endif %}

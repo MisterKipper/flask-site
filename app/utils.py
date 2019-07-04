@@ -49,8 +49,10 @@ def insert_fake_posts(count=100):
     for i in range(count):
         body = fake.text(max_nb_chars=1000)
         p = Post(title=fake.text(max_nb_chars=80),
+                 slug=fake.slug(),
                  body=body,
-                 summary=body[:200],
+                 summary=body[:body.index('.',
+                                          body.index('.') + 1)],
                  timestamp=fake.past_datetime(),
                  author=u)
         db.session.add(p)

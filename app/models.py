@@ -176,6 +176,7 @@ class Permission:
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
+    slug = db.Column(db.Text, index=True)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     body = db.Column(db.Text)
     summary = db.Column(db.Text)

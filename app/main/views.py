@@ -32,9 +32,11 @@ def user(username):
     return render_template("user.html.j2", user=user, posts=posts)
 
 
-@main.route("/post/<int:id>", methods=["GET", "POST"])
-def post(id):
-    post = Post.query.get_or_404(id)
+@main.route("/post/<slug>", methods=["GET", "POST"])
+def post(slug):
+    post = Post.query.filter_by(slug=slug).first()
+    if not post:
+        abort(404)
     form = CommentForm()
     if form.validate_on_submit():
         if not current_user.is_authenticated:
@@ -48,10 +50,12 @@ def post(id):
     return render_template("post.html.j2", post=post, form=form, comments=comments)
 
 
-@main.route("/post/edit/<int:id>", methods=["GET", "POST"])
+@main.route("/post/edit/<slug>", methods=["GET", "POST"])
 @login_required
-def edit_post(id):
-    post = Post.query.get_or_404(id)
+def edit_post(slug):
+    post = Post.query.filter_by(slug=slug).first()
+    if not post:
+        abort(404)
     if not (current_user.is_admin() or current_user == post.author):
         abort(403)
     form = PostForm()
