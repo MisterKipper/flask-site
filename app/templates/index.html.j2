@@ -4,9 +4,7 @@
 {% set title = "Home" %}
 {% block content %}
 {% include "_posts.html.j2" %}
-<div class="pagination">
-  {{macros.pagination_widget(pagination, ".index")}}
-</div>
+{{macros.pagination_widget(pagination, ".index")}}
 {% endblock %}
 
 {% block scripts %}

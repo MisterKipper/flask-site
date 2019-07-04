@@ -10,8 +10,6 @@
 {% set moderate = True %}
 {% include "_comments.html.j2" %}
 {% if pagination %}
-<div class="pagination">
-  {{macros.pagination_widget(pagination, ".moderate")}}
-</div>
+{{macros.pagination_widget(pagination, ".moderate")}}
 {% endif %}
 {% endblock content %}

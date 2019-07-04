@@ -160,7 +160,7 @@ li.post {
 nav.post-footer {
     text-align: right;
 }
-div.pagination {
+nav.pagination {
     display: inline-block;
 }
 ul.pagination {
