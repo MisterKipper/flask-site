@@ -18,23 +18,15 @@ body {
     margin: 0;
     min-height: 100vh;
 }
-body > * + * {
-    margin-top: 1.5rem;
-}
-body > :first-child {
-    margin-top: 0;
-}
-body > :last-child {
-    margin-bottom: 0;
-}
 .navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #425;
+    /* background-color: #425; */
+    background-image: radial-gradient(90% 90%, #617, #425);
     font-family: var(--font-sans);
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 0.67rem;
 }
 .navbar > ul {
     list-style: none;
@@ -43,10 +35,12 @@ body > :last-child {
     margin-right: 1rem;
     padding-inline-start: 0;
 }
-.navbar > ul > li {
+.navbar li {
     display: inline-block;
     margin-left: 1rem;
-    margin-right: 0rem;
+}
+.navbar li:first-child {
+    margin-left: 0;
 }
 .navbar > ul > li > a {
     color: #EAF;
@@ -135,15 +129,12 @@ input[type="submit"]:focus, input[type="submit"]:hover {
 }
 ul.demos {
     list-style: none;
+    padding-inline-start: 0;
 }
-div.demo-thumbnail {
-    position: absolute;
-    width: 3rem;
+img.demo-thumbnail {
+    float: left;
+    width: 4rem;
     height: 3rem;
-}
-div.demo-description {
-    margin-left: 3rem;
-    min-height: 3rem;
 }
 ul.blog-posts {
     list-style: none;
@@ -168,6 +159,39 @@ ul.pagination {
 }
 ul.pagination > li {
     display: inline;
+}
+ul.comments {
+    list-style: none;
+    padding-inline-start: 0;
+}
+li.comment {
+    border-radius: 0.2rem;
+    border-style: solid;
+    border-width: 0.01rem;
+    margin: 0;
+    margin-top: 0.67rem;
+    padding: 0.67rem;
+}
+li.comment:first-child {
+    margin-top: 0;
+}
+.comment-thumbnail {
+    postition: absolute;
+}
+footer.comment {
+    text-align: right;
+    background-color: inherit;
+}
+footer.comment > a {
+    margin-left: 1.5rem;
+    border-radius: 0.2rem;
+    border-color: #8a559f;
+    border-width: 0.2rem;
+    border-style: solid;
+    padding: 0.2rem;
+    background-color: #77448a;
+    color: #EAF;
+    /* box-shadow: darkviolet; */
 }
 textarea {
     font-family: inherit;
