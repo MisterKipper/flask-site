@@ -4,7 +4,7 @@ from flask_sqlalchemy import get_debug_queries
 
 from .. import db
 from ..decorators import admin_required, permission_required
-from ..models import Comment, Permission, Post, Role, User
+from ..models import Comment, Demo, Image, Permission, Post, Role, User
 from . import main
 from .forms import CommentForm, EditProfileAdminForm, EditProfileForm, PostForm
 
@@ -45,7 +45,7 @@ def post(slug):
         db.session.add(comment)
         db.session.commit()
         flash("Comment added.")
-        return redirect(url_for(".post", id=post.id, page=-1))
+        return redirect(url_for(".post", slug=post.slug, page=-1))
     comments = post.comments.filter_by(parent=None).order_by(Comment.timestamp.desc())
     return render_template("post.html.j2", post=post, form=form, comments=comments)
 
@@ -64,7 +64,7 @@ def edit_post(slug):
         db.session.add(post)
         db.session.commit()
         flash("Post updated.")
-        return redirect(url_for(".post", id=post.id))
+        return redirect(url_for(".post", slug=post.slug))
     form.body.data = post.body
     return render_template("edit-post.html.j2", form=form)
 
@@ -80,7 +80,7 @@ def edit_comment(id):
         db.session.add(comment)
         db.session.commit()
         flash("Comment edited.")
-        return redirect(url_for(".post", id=comment.post_id))
+        return redirect(url_for(".post", slug=comment.post.slug))
     form.body.data = comment.body
     return render_template("edit-comment.html.j2", form=form, comment=comment)
 
@@ -98,7 +98,7 @@ def reply_to_comment(id):
         db.session.add(comment)
         db.session.commit()
         flash("Comment created.")
-        return redirect(url_for(".post", id=comment.post_id))
+        return redirect(url_for(".post", slug=comment.post.slug))
     return render_template("comment.html.j2", form=form, comments=[parent])
 
 
@@ -201,7 +201,14 @@ def server_shutdown():
 
 @main.route("/demos")
 def demos():
-    return render_template("demos.html.j2")
+    demos = Demo.query.all()
+    return render_template("demos.html.j2", demos)
+
+
+@main.route("/img/<filename>")
+def image(filename):
+    img = Image.query.filter_by(filename=filename).first()
+    return img.data
 
 
 @main.route("/about-me")
@@ -211,7 +218,11 @@ def about_me():
 
 @main.route("/blog")
 def blog():
-    return render_template("blog.html.j2")
+    page = request.args.get("page", 1, type=int)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
+        page, per_page=current_app.config["POSTS_PER_PAGE"], error_out=False)
+    posts = pagination.items
+    return render_template("blog.html.j2", posts=posts, pagination=pagination)
 
 
 @main.after_app_request

@@ -47,12 +47,12 @@ def insert_fake_posts(count=100):
     admin = Role.query.filter_by(name="admin").first()
     u = User.query.filter_by(role=admin).first()
     for i in range(count):
-        body = fake.text(max_nb_chars=1000)
-        p = Post(title=fake.text(max_nb_chars=80),
-                 slug=fake.slug(),
-                 body=body,
-                 summary=body[:body.index('.',
-                                          body.index('.') + 1)],
+        body_list = fake.paragraphs(10)
+        title = fake.sentence(5)
+        p = Post(title=title,
+                 slug=fake.slug(title),
+                 body="\n".join(body_list),
+                 summary=body[0],
                  timestamp=fake.past_datetime(),
                  author=u)
         db.session.add(p)
@@ -76,6 +76,18 @@ def insert_fake_comments(count=1000):
         else:
             parent = None
             timestamp = fake.date_time_between(post.timestamp, "now")
-        c = Comment(body=fake.text(), timestamp=timestamp, author=user, post=post, parent=parent)
+        c = Comment(body=fake.paragraphs(randint(0, 2)),
+                    timestamp=timestamp,
+                    author=user,
+                    post=post,
+                    parent=parent)
         db.session.add(c)
     db.session.commit()
+
+
+def insert_fake_demos(count=10):
+    from faker import Faker
+    fake = Faker()
+    for i in range(count):
+        title = fake.sentence(5)
+        d = Demo(title=title, slug=fake.slug(title))
