@@ -9,7 +9,7 @@ dotenv.load_dotenv(dotenv.find_dotenv())
 
 import app.utils as utils
 from app import create_app, db
-from app.models import Comment, Post, Role, User
+from app.models import Comment, Demo, Image, Post, Role, User
 
 COV = None
 if os.environ.get("FLASK_COVERAGE"):
@@ -24,7 +24,15 @@ migrate_init = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return {"db": db, "User": User, "Post": Post, "Role": Role, "Comment": Comment}
+    return {
+        "db": db,
+        "User": User,
+        "Post": Post,
+        "Role": Role,
+        "Comment": Comment,
+        "Demo": Demo,
+        "Image": Image
+    }
 
 
 @app.cli.command()
