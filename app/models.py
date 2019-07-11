@@ -176,7 +176,7 @@ class Permission:
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
-    slug = db.Column(db.Text, index=True)
+    slug = db.Column(db.Text, index=True, unique=True)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     body = db.Column(db.Text)
     summary = db.Column(db.Text)
@@ -209,6 +209,29 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"<Comment {self.id}>"
+
+
+class Demo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text)
+    slug = db.Column(db.Text, index=True)
+    summary = db.Column(db.Text)
+    body = db.Column(db.Text)
+    thumbnail_id = db.Column(db.Integer, db.ForeignKey("image.id"))
+
+    def __repr__(self):
+        return f"<Demo {self.slug}>"
+
+
+class Image(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.Text, index=True, unique=True)
+    data = db.Column(db.Binary)
+    alt_text = db.Column(db.Text)
+    thumbnail_for = db.relationship("Demo", backref="thumbnail", lazy="dynamic")
+
+    def __repr__(self):
+        return f"<Image {self.filename}>"
 
 
 @login.user_loader
