@@ -5,7 +5,7 @@
 User {{user.username}}'s profile
 {% endblock %}
 {% block content %}
-  <img class="img-rounded profile-thumbnail" src="{{user.avatar(256)}}">
+  <img class="img-rounded profile-thumbnail" src="{{user.avatar(256)}}" alt="{{user.username}}'s avatar.">
   <div class="profile-header">
     {% if user.name or user.location %}
     <p>
