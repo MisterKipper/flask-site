@@ -13,51 +13,71 @@
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar">
-      <ul>
-        <li><a href="{{url_for('main.index')}}">kyledavi.es</a></li>
-        <li><a href="{{url_for('main.blog')}}">Blog</a></li>
-        <li><a href="{{url_for('main.demos')}}">Demos</a></li>
-        <li><a href="{{url_for('main.about_me')}}">About Me</a></li>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{{url_for('main.index')}}">kyledavi.es</a></li>
+          <li><a href="{{url_for('main.blog')}}">Blog</a></li>
+          <li><a href="{{url_for('main.demos')}}">Demos</a></li>
+          <li><a href="{{url_for('main.about_me')}}">About Me</a></li>
+        </ul>
+        <ul>
+          {% if current_user.is_anonymous %}
+          <li><a href="{{url_for('auth.login')}}">Login/Register</a></li>
+          {% else %}
+          <li><a href="{{url_for('main.user', username=current_user.username)}}">Profile</a></li>
+          <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <ul class="messages">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <li>
+          <dialog open role="alert">
+            {{message}}
+            <button class="dialog-dismiss">×</button>
+          </dialog>
+        </li>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
       </ul>
-      <ul>
-        {%- if current_user.is_anonymous %}
-        <li><a href="{{url_for('auth.login')}}">Login/Register</a></li>
-        {%- else %}
-        <li><a href="{{url_for('main.user', username=current_user.username)}}">Profile</a></li>
-        <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
-        {%- endif %}
-      </ul>
-    </nav>
-    <div class="messages">
-      {%- with messages = get_flashed_messages() %}
-      {%- if messages %}
-      {%- for message in messages %}
-      <dialog class="alert alert-info" open="" role="alert">
-        {{message}}
-        <button class="dialog-dismiss">×</button>
-      </dialog>
-      {% endfor %}
-      {% endif %}
-      {%- endwith %}
-    </div>
+    </header>
     <main>
       <h1>
-        {%- block page_header %}
+        {% block page_header %}
         {% if current_user.is_anonymous %}
         Welcome to Kyle's junk!
         {% else %}
         Hello, {{current_user.username}}!
         {% endif %}
-        {% endblock page_header -%}
+        {% endblock page_header %}
       </h1>
       {% block content %}{% endblock %}
     </main>
     <footer>
-      <p>&copy; 2019 Kyle F. Davies</p>
+      &copy; 2019 Kyle F. Davies
     </footer>
     {% block scripts %}
     <script src="{{url_for('static', filename='js/modals.js')}}"></script>
     {% endblock %}
+    <script>
+     function clean(node) {
+         for (var n = 0; n < node.childNodes.length; n ++) {
+             var child = node.childNodes[n];
+             if (child.nodeType === 8 ||
+                 (child.nodeType === 3 && !/\S/.test(child.nodeValue))) {
+                 node.removeChild(child);
+                 n --;
+             }
+             else if(child.nodeType === 1) {
+                 clean(child);
+             }
+         }
+     }
+     clean(document);
+    </script>
   </body>
 </html>

@@ -2,24 +2,24 @@
   {%- for comment in comments recursive %}
   <li class="comment">
     <header class="comment">
-      <a href="{{url_for('.user', username=comment.author.username)}}">
-        <img class="profile-thumbnail" src="{{comment.author.avatar(size=40)}}" alt="{{comment.author.username}}'s avatar.">
-      </a>
-      <div class="comment-date">{{moment(comment.timestamp).fromNow()}}</div>
       <div class="comment-author">
+        <a href="{{url_for('.user', username=comment.author.username)}}">
+          <img class="profile-thumbnail" src="{{comment.author.avatar(size=40)}}" alt="{{comment.author.username}}'s avatar.">
+        </a>
         <a href="{{url_for('.user', username=comment.author.username)}}">
           {{comment.author.username}}
         </a>
       </div>
+      <time class="post-date" datetime="{{comment.timestamp}}"></time>
     </header>
-    <div class="comment-body">
+    <article class="comment-body">
       {% if comment.disabled %}
       <p><i>Comment deleted.</i></p>
       {% endif %}
       {% if moderate or not comment.disabled %}
       {{comment.body_html}}
       {% endif %}
-    </div>
+    </article>
     <footer class="comment">
       {% if current_user == comment.author %}
       <a href="{{url_for('.edit_comment', id=comment.id)}}" class="label label-primary">

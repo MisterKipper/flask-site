@@ -1,22 +1,8 @@
 'use strict';
-moment.locale("en_GB");
-
-function flask_moment_render(el) {
-    el.textContent = eval('moment("' + el.getAttribute('data-timestamp') + '").' + el.getAttribute('data-format') + ';');
-    el.classList.remove('flask-moment');
-    el.style.display = '';
-}
-
-function flask_moment_render_all() {
-    document.querySelectorAll('.flask-moment').forEach(function(el) {
-        flask_moment_render(el);
-        if (el.getAttribute('data-refresh')) {
-            (function(el, interval) {
-                setInterval(function() {
-                    flask_moment_render(el);
-                }, interval);
-            })(el, el.getAttribute('data-refresh'));
-        }
+function render_all_timestamps() {
+    document.querySelectorAll(".post-date").forEach(function(el) {
+        var date = new Date(el.getAttribute("datetime"));
+        el.textContent = date.toLocaleDateString("en-GB", {day: "numeric", month: "long", year: "numeric"});
     });
 }
-document.addEventListener("DOMContentLoaded", flask_moment_render_all);
+document.addEventListener("DOMContentLoaded", render_all_timestamps);
